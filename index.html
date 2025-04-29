@@ -93,15 +93,21 @@
   <!-- Script List -->
   <div id="scriptList">
     <div class="card" data-title="Script 1 Title" data-desc="Description for script 1">
-      <div class="card-title">Dead Rails Script</div>
-      <div class="card-desc">Pretty Good Dead Rails Script And Really Easy To Use</div>
-      <button class="btn" onclick="showMessage('Dead Rails Script', 'https://example.com')">View</button>
+      <div class="card-title">Script 1 Title</div>
+      <div class="card-desc">Description for script 1</div>
+      <button class="btn" onclick="showMessage('Hello World!', 'https://example.com')">View</button>
     </div>
 
     <div class="card" data-title="Script 2 Title" data-desc="Description for script 2">
-      <div class="card-title">Roblox Executor</div>
-      <div class="card-desc">A Custom Roblox Executor I Made</div>
-      <button class="btn" onclick="showMessage('VPS Executor', 'https://example.org')">View</button>
+      <div class="card-title">Script 2 Title</div>
+      <div class="card-desc">Description for script 2</div>
+      <button class="btn" onclick="showMessage('Welcome to my site!', 'https://example.org')">View</button>
+    </div>
+    
+    <div class="card" data-title="Awesome Script" data-desc="An amazing script to do awesome things">
+      <div class="card-title">Awesome Script</div>
+      <div class="card-desc">An amazing script to do awesome things</div>
+      <button class="btn" onclick="showMessage('Check out this script!', 'https://awesome.com')">View</button>
     </div>
   </div>
 
@@ -132,13 +138,17 @@
     }
 
     document.getElementById('searchInput').addEventListener('input', function () {
-      const query = this.value.toLowerCase();
+      const query = this.value.toLowerCase().trim(); // Ensure input is lower case and trimmed
       const cards = document.querySelectorAll('.card');
 
       cards.forEach(card => {
         const title = card.dataset.title.toLowerCase();
         const desc = card.dataset.desc.toLowerCase();
+
+        // Check if the title or description contains the search query (case-insensitive)
         const match = title.includes(query) || desc.includes(query);
+
+        // Show or hide cards based on match
         card.classList.toggle('hidden', !match);
       });
     });
