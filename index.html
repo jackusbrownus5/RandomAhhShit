@@ -60,25 +60,12 @@
       border-radius: 6px;
       cursor: pointer;
       font-weight: bold;
-      opacity: 1; /* Ensure buttons are visible initially */
-      transform: translateY(0); /* Ensure buttons are in their normal position initially */
-      transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition */
+      opacity: 1; /* Buttons are visible by default */
+      transform: translateY(0); /* No translation applied */
     }
 
     .btn:hover {
       background-color: #d32f2f;
-    }
-
-    .btn.animate {
-      opacity: 1; /* Ensure buttons stay visible */
-      transform: translateY(0); /* Ensure the button is in its normal position */
-    }
-
-    @keyframes slideUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
 
     .hidden {
@@ -137,15 +124,6 @@
 
       const goBtn = document.getElementById('goButton');
       goBtn.onclick = () => window.location.href = url;
-
-      const backBtn = document.getElementById('backButton');
-
-      // Adding animation to the buttons
-      [goBtn, backBtn].forEach(btn => {
-        btn.classList.remove('animate');
-        void btn.offsetWidth;  // This forces a reflow, necessary to restart the animation
-        btn.classList.add('animate');
-      });
     }
 
     function goBack() {
