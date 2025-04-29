@@ -69,6 +69,18 @@
     .hidden {
       display: none;
     }
+
+    .message-box {
+      background-color: #1e1e1e;
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 600px;
+      margin: 40px auto;
+      font-size: 1.2em;
+      color: #ccc;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
   </style>
 </head>
 <body>
@@ -76,23 +88,43 @@
 
   <input id="searchInput" class="search-bar" type="text" placeholder="Search scripts by name or description..." />
 
-  <div class="card" data-title="Script 1 Title" data-desc="Description for script 1">
-    <div class="card-title">Script 1 Title</div>
-    <div class="card-desc">Description for script 1</div>
-    <button class="btn" onclick="goToText('Hello World!', 'https://jackusbrownus5.github.io/You-stupid-nih/deadrails/')">View</button>
+  <!-- Script List -->
+  <div id="scriptList">
+    <div class="card" data-title="Script 1 Title" data-desc="Description for script 1">
+      <div class="card-title">Script 1 Title</div>
+      <div class="card-desc">Description for script 1</div>
+      <button class="btn" onclick="showMessage('Hello World!', 'https://example.com')">View</button>
+    </div>
+
+    <div class="card" data-title="Script 2 Title" data-desc="Description for script 2">
+      <div class="card-title">Script 2 Title</div>
+      <div class="card-desc">Description for script 2</div>
+      <button class="btn" onclick="showMessage('Welcome to my site!', 'https://example.org')">View</button>
+    </div>
   </div>
 
-  <div class="card" data-title="Script 2 Title" data-desc="Description for script 2">
-    <div class="card-title">Script 2 Title</div>
-    <div class="card-desc">Description for script 2</div>
-    <button class="btn" onclick="goToText('Welcome to my site!', 'https://jackusbrownus5.github.io/You-stupid-nih/deadrails/')">View</button>
+  <!-- Display Section (Hidden by Default) -->
+  <div id="messageSection" class="hidden">
+    <div class="message-box" id="textBox">Loading...</div>
+    <button class="btn" id="goButton">Go to Website</button>
+    <br><br>
+    <button class="btn" onclick="goBack()">Back</button>
   </div>
 
   <script>
-    function goToText(message, url) {
-      const encodedMessage = encodeURIComponent(message);
-      const encodedUrl = encodeURIComponent(url);
-      window.location.href = `display.html?text=${encodedMessage}&url=${encodedUrl}`;
+    function showMessage(message, url) {
+      document.getElementById('scriptList').classList.add('hidden');
+      document.getElementById('messageSection').classList.remove('hidden');
+      document.getElementById('textBox').textContent = message;
+
+      document.getElementById('goButton').onclick = () => {
+        window.location.href = url;
+      };
+    }
+
+    function goBack() {
+      document.getElementById('messageSection').classList.add('hidden');
+      document.getElementById('scriptList').classList.remove('hidden');
     }
 
     document.getElementById('searchInput').addEventListener('input', function () {
