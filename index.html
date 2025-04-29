@@ -125,6 +125,7 @@
   <div id="messageSection" class="hidden">
     <div class="message-box" id="textBox">
       <div id="messageText">Loading...</div>
+      <br />
       <button class="btn" id="goButton">Go to Website</button>
     </div>
     <br>
@@ -142,15 +143,12 @@
 
       goBtn.onclick = () => window.location.href = url;
 
-      // Remove previous animation classes
+      // Reset animation
       goBtn.classList.remove('animate');
       backBtn.classList.remove('animate');
-
-      // Trigger reflow to restart animation
-      void goBtn.offsetWidth;
+      void goBtn.offsetWidth; // force reflow
       void backBtn.offsetWidth;
 
-      // Re-add animation class
       goBtn.classList.add('animate');
       backBtn.classList.add('animate');
     }
