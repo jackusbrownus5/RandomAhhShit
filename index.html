@@ -60,8 +60,9 @@
       border-radius: 6px;
       cursor: pointer;
       font-weight: bold;
-      opacity: 0;
-      transform: translateY(40px);
+      opacity: 1; /* Ensure buttons are visible initially */
+      transform: translateY(0); /* Ensure buttons are in their normal position initially */
+      transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition */
     }
 
     .btn:hover {
@@ -69,7 +70,8 @@
     }
 
     .btn.animate {
-      animation: slideUp 0.6s ease forwards;
+      opacity: 1; /* Ensure buttons stay visible */
+      transform: translateY(0); /* Ensure the button is in its normal position */
     }
 
     @keyframes slideUp {
@@ -138,9 +140,10 @@
 
       const backBtn = document.getElementById('backButton');
 
+      // Adding animation to the buttons
       [goBtn, backBtn].forEach(btn => {
         btn.classList.remove('animate');
-        void btn.offsetWidth;
+        void btn.offsetWidth;  // This forces a reflow, necessary to restart the animation
         btn.classList.add('animate');
       });
     }
