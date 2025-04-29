@@ -60,6 +60,7 @@
       border-radius: 6px;
       cursor: pointer;
       font-weight: bold;
+      margin-top: 10px;
       opacity: 0;
       transform: translateY(40px);
     }
@@ -69,10 +70,14 @@
     }
 
     .btn.animate {
-      animation: slideUp 0.6s ease forwards;
+      animation: slideUp 0.5s ease forwards;
     }
 
     @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
       to {
         opacity: 1;
         transform: translateY(0);
@@ -120,7 +125,6 @@
   <div id="messageSection" class="hidden">
     <div class="message-box" id="textBox">
       <div id="messageText">Loading...</div>
-      <br>
       <button class="btn" id="goButton">Go to Website</button>
     </div>
     <br>
@@ -134,16 +138,21 @@
       document.getElementById('messageText').textContent = message;
 
       const goBtn = document.getElementById('goButton');
-      goBtn.onclick = () => window.location.href = url;
-
       const backBtn = document.getElementById('backButton');
 
-      // Reset and apply animation class
-      [goBtn, backBtn].forEach(btn => {
-        btn.classList.remove('animate');
-        void btn.offsetWidth; // Force reflow to restart animation
-        btn.classList.add('animate');
-      });
+      goBtn.onclick = () => window.location.href = url;
+
+      // Remove previous animation classes
+      goBtn.classList.remove('animate');
+      backBtn.classList.remove('animate');
+
+      // Trigger reflow to restart animation
+      void goBtn.offsetWidth;
+      void backBtn.offsetWidth;
+
+      // Re-add animation class
+      goBtn.classList.add('animate');
+      backBtn.classList.add('animate');
     }
 
     function goBack() {
