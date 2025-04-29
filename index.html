@@ -60,8 +60,6 @@
       border-radius: 6px;
       cursor: pointer;
       font-weight: bold;
-      opacity: 1; /* Buttons are visible by default */
-      transform: translateY(0); /* No translation applied */
     }
 
     .btn:hover {
@@ -92,20 +90,20 @@
 
   <!-- Script List -->
   <div id="scriptList">
-    <div class="card" data-title="Dead Rails Script" data-desc="Description for Dead Rails Script">
+    <div class="card">
       <div class="card-title">Dead Rails Script</div>
-      <div class="card-desc">Description for Dead Rails Script</div>
-      <button class="btn" onclick="showMessage('Hello World!', 'https://example.com')">View</button>
+      <div class="card-desc">A powerful tool for Dead Rails game.</div>
+      <button class="btn" onclick="showMessage('Dead Rails Activated!', 'https://example.com')">View</button>
     </div>
 
-    <div class="card" data-title="Roblox Executor" data-desc="Description for Roblox Executor">
+    <div class="card">
       <div class="card-title">Roblox Executor</div>
-      <div class="card-desc">Description for Roblox Executor</div>
-      <button class="btn" onclick="showMessage('Welcome to my site!', 'https://example.org')">View</button>
+      <div class="card-desc">Execute custom scripts in Roblox safely.</div>
+      <button class="btn" onclick="showMessage('Executor Loaded!', 'https://example.org')">View</button>
     </div>
   </div>
 
-  <!-- Display Section (Hidden by Default) -->
+  <!-- Display Section -->
   <div id="messageSection" class="hidden">
     <div class="message-box" id="textBox">
       <div id="messageText">Loading...</div>
@@ -121,9 +119,7 @@
       document.getElementById('scriptList').classList.add('hidden');
       document.getElementById('messageSection').classList.remove('hidden');
       document.getElementById('messageText').textContent = message;
-
-      const goBtn = document.getElementById('goButton');
-      goBtn.onclick = () => window.location.href = url;
+      document.getElementById('goButton').onclick = () => window.location.href = url;
     }
 
     function goBack() {
@@ -131,19 +127,14 @@
       document.getElementById('scriptList').classList.remove('hidden');
     }
 
-    // Search functionality: Only search the title of the scripts
+    // Search using the visible card title (no data-title needed)
     document.getElementById('searchInput').addEventListener('input', function () {
-      const query = this.value.toLowerCase().trim(); // Ensure input is lower case and trimmed
+      const query = this.value.toLowerCase().trim();
       const cards = document.querySelectorAll('.card');
 
       cards.forEach(card => {
-        const title = card.dataset.title.toLowerCase();
-
-        // Check if the title contains the search query (case-insensitive)
-        const match = title.includes(query);
-
-        // Show or hide cards based on match
-        card.classList.toggle('hidden', !match);
+        const title = card.querySelector('.card-title').textContent.toLowerCase();
+        card.classList.toggle('hidden', !title.includes(query));
       });
     });
   </script>
