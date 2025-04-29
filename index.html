@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Script Hub</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    header {
+      font-size: 1.8em;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .search-bar {
+      background-color: #1e1e1e;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 10px;
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto 30px auto;
+      color: #ddd;
+      display: block;
+    }
+
+    .card {
+      background-color: #1e1e1e;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 600px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-title {
+      font-size: 1.3em;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .card-desc {
+      font-size: 1em;
+      margin-bottom: 15px;
+      color: #ccc;
+    }
+
+    .btn {
+      background-color: #e53935;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .btn:hover {
+      background-color: #d32f2f;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>My Script Hub</header>
+
+  <input id="searchInput" class="search-bar" type="text" placeholder="Search scripts by name or description..." />
+
+  <div class="card" data-title="Script 1 Title" data-desc="Description for script 1">
+    <div class="card-title">Script 1 Title</div>
+    <div class="card-desc">Description for script 1</div>
+    <button class="btn" onclick="goToText('Hello World!', 'https://example.com')">View</button>
+  </div>
+
+  <div class="card" data-title="Script 2 Title" data-desc="Description for script 2">
+    <div class="card-title">Script 2 Title</div>
+    <div class="card-desc">Description for script 2</div>
+    <button class="btn" onclick="goToText('Welcome to my site!', 'https://example.org')">View</button>
+  </div>
+
+  <script>
+    function goToText(message, url) {
+      const encodedMessage = encodeURIComponent(message);
+      const encodedUrl = encodeURIComponent(url);
+      window.location.href = `display.html?text=${encodedMessage}&url=${encodedUrl}`;
+    }
+
+    document.getElementById('searchInput').addEventListener('input', function () {
+      const query = this.value.toLowerCase();
+      const cards = document.querySelectorAll('.card');
+
+      cards.forEach(card => {
+        const title = card.dataset.title.toLowerCase();
+        const desc = card.dataset.desc.toLowerCase();
+        const match = title.includes(query) || desc.includes(query);
+        card.classList.toggle('hidden', !match);
+      });
+    });
+  </script>
+</body>
+</html>

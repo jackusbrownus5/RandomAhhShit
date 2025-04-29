@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>View Script</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .box {
+      background-color: #1e1e1e;
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 600px;
+      margin: 40px auto;
+      font-size: 1.2em;
+      color: #ccc;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .btn {
+      background-color: #e53935;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    .btn:hover {
+      background-color: #d32f2f;
+    }
+  </style>
+</head>l
+<body>
+  <div class="box" id="textBox">Loading...</div>
+  <button class="btn" id="goButton">Grow A Garden Script</button>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const text = params.get("text") || "No message provided.";
+    const url = params.get("url") || "#";
+
+    document.getElementById("textBox").textContent = text;
+
+    document.getElementById("goButton").onclick = () => {
+      window.location.href = url;
+    };
+  </script>
+</body>
+</html>
